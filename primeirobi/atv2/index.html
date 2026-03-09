@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>Página de Cadastro</h1>
+    </header>
+
+    <form action="#" method="POST">
+        <fieldset style="border: 2px solid silver;">
+            <legend>Crie sua conta </legend>
+
+            <Label for="Nome">Nome:</Label> <br>
+            <input type="text" name="Nome"> <br><br>
+
+            <Label for="email:">E-mail:</Label> <br>
+            <input type="email" id="email" name="email" required placeholder="seuemail@dominio.com"><br><br>
+            <Label for="senha">Senha (mínimo 8 caracteres):</Label><br>
+            <input type="password" name="senha" minlength="8" required><br><br>
+
+            <label for="gênero">
+                <strong>Gênero:</strong> 
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="genero" value="masculino" /> Masculino <br>
+            </label>
+
+            <label>
+                <input type="radio" name="genero" value="feminino" /> Feminino <br>
+
+            </label>
+
+            <label>
+                <input type="radio" name="genero" value="outro" /> Outro <br><br>
+            </label>
+
+            <label for="biografia">Biografia </label> <br>
+            <textarea name="Biogradia" id="biogradia" rows="5" cols="27"
+                placeholder="Fale um pouco sobre você..."></textarea> <br><br>
+
+            <input type="checkbox" name="termos" required> 
+            <label for="termos">Eu li e aceito os termos de serviço.</label><br>
+        </fieldset>
+
+        <br>
+
+        <button type="submit">Cadastrar</button>
+        <button type="reset">Limpar</button>
+
+
+    </form>
+</body>
+
+</html>
