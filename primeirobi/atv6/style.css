@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #7fbaeb;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: white;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+}
+
+li:hover {
+    background-color: #a79093;
+}
+
+.complete-checkbox {
+    margin-right: 10px;
+    cursor: pointer;
+}
