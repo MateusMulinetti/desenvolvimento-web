@@ -1,0 +1,30 @@
+# Ignorar as bibliotecas do Node (React, Vite, etc)
+node_modules/
+
+# Ignorar pastas de compilação/build
+dist/
+build/
+
+# Ignorar ficheiros de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar logs de erro
+npm-debug.log*
+
+# Ignorar configurações do próprio VS Code (opcional)
+.vscode/
+
+# Ignorar imagens específicas ou pastas de assets
+src/assets/
+public/favicon.svg
+public/icons.svg
+*.png
+*.svg
+
+node_modules/
+dist/
+.vscode/
+.DS_Store
+
+package-lock.json
