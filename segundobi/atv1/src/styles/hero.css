@@ -1,0 +1,94 @@
+#hero {
+    background: linear-gradient(180deg, var(--bg-color) 0%, var(--light-gray) 100%);
+    border-top: 0.125rem solid #1e222b;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero > span > img {
+    display: none;
+}
+
+/* Foto do carro em manutenção */
+#hero > img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    object-fit: cover; 
+    opacity: 0.6;
+}
+
+#hero p {
+  color: var(--second-text-color);
+}
+
+#hero .content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; 
+    gap: 1.75rem;
+    width: 50%;
+}
+
+#hero .content h1 {
+    max-width: 90%;
+}
+
+#hero .content > div {
+    width: fit-content;
+    margin-bottom: 0;
+}
+
+@media (width >= 1280px) {
+    #hero {
+        background: var(--bg-color);
+        border-top: none;
+        min-height: 85vh;
+    }
+
+    #hero > img {
+        opacity: 1; 
+    }
+
+    .content {
+        gap: 2.5rem;
+    }
+
+    .content p {
+        width: 90%;
+    }
+
+    .content > div :first-child {
+        width: auto;
+    }
+
+    .content p:first-of-type {
+        color: var(--primary-color);
+        font-weight: var(--fw-bold);
+    }
+}
+
+@media (width < 768px) {
+    #hero {
+        min-height: 90vh;
+    }
+    #hero > img {
+        width: 100%;
+        opacity: 0.25;
+    }
+    #hero .content {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+    #hero .content h1 {
+        font-size: var(--fs-xl);
+    }
+}
