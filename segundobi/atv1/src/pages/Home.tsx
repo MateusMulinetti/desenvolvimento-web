@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 
-// Assets Globais / Header
 import Logo from "../assets/logo.svg"; 
 import Menu from "../assets/hamburguer.svg"; 
 import Close from "../assets/close.svg";
 import Button from "../components/Button";
 
-// Assets do Hero
 import CarMaintenance from "../assets/images/car-maintenance.jpg";
 import OficinaBackground from "../assets/images/oficina-background.jpg";
 
-// Assets de Serviços (9 Ícones Individuais)
 import MecanicaIcon from "../assets/images/mecanica-icon.svg";
 import SuspensaoIcon from "../assets/images/suspensao-icon.svg";
 import FreiosIcon from "../assets/images/freios-icon.svg";
@@ -21,21 +18,17 @@ import ScannerIcon from "../assets/images/scanner-icon.svg";
 import RevisoesIcon from "../assets/images/revisoes-icon.svg";
 import InjecaoIcon from "../assets/images/injecao-icon.svg";
 
-// Assets de Depoimentos (Os 3 Clientes)
-import ClienteMarcos from "../assets/images/cliente-marcos.jpg"; 
-import ClienteJuca from "../assets/images/cliente-juca.jpg"; 
-import ClientePedro from "../assets/images/cliente-pedro.jpg"; 
+import Cliente1 from "../assets/images/iconperfil.png"; 
+import Cliente2 from "../assets/images/iconperfil.png"; 
+import Cliente3 from "../assets/images/iconperfil.png"; 
 import TestimonialCard from "../components/TestimonialCard";
 
-// Componente de Planos
 import PricingCard from "../components/PricingCard";
 
-// Ícones de Redes Sociais do Rodapé
 import InstagramIcon from "../assets/images/instagram-icon.svg";
 import FacebookIcon from "../assets/images/facebook-icon.svg";
 import WhatsappFootIcon from "../assets/images/whatsapp-foot-icon.svg";
 
-// Estilos
 import "../styles/utility.css";
 import "../styles/header.css";
 import "../styles/hero.css";
@@ -48,8 +41,8 @@ import "../styles/footer.css";
 export default function Home() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     
-    // WhatsApp Oficial Integrado
-    const whatsappLink = "https://wa.me/5541999348661?text=Olá,%20gostaria%20de%20agendar%20uma%20revisão%20na%20Starmec!";
+  
+    const whatsappLink = "https://wa.me/5545999348661?text=Olá,%20gostaria%20de%20agendar%20uma%20revisão%20na%20Starmec!";
 
     useEffect(() => {
         const html = document.querySelector("html");
@@ -69,7 +62,7 @@ export default function Home() {
 
     return (
         <>
-            {/* ================= HEADER SECTOR ================= */}
+            {}
             <header className="container py-sm">
                 <nav className="flex items-center justify-between">
                     <img src={Logo} alt="Logo Starmec" width={220} height={80} />
@@ -85,7 +78,7 @@ export default function Home() {
 
                     <div className="desktop-only">
                         <div className="flex items-center">
-                            <a className="reverse-color ml-lg" href={whatsappLink} target="_blank" rel="noreferrer">Contato: (41) 9.9934-8661</a>
+                            <a className="reverse-color ml-lg" href={whatsappLink} target="_blank" rel="noreferrer">Contato: (45) 999348661</a>
                             <a href={whatsappLink} target="_blank" rel="noreferrer">
                                 <Button text="Chamar no Zap" />
                             </a>
@@ -117,7 +110,7 @@ export default function Home() {
                 </nav>
             </header>
 
-            {/* ================= HERO SECTOR ================= */}
+            {}
             <section id="hero">
                 <span className="desktop-only">
                     <img src={OficinaBackground} alt="Estrutura interna da oficina Starmec" />
@@ -146,7 +139,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ================= SERVICES SECTOR ================= */}
+            {}
             <section className="container" id="solution">
                 <header>
                     <span>
@@ -245,7 +238,7 @@ export default function Home() {
                 </section>
             </section>
 
-            {/* ================= TESTIMONIALS SECTOR ================= */}
+            {}
             <section id="testimonials">
                 <header>
                     <span>
@@ -261,46 +254,46 @@ export default function Home() {
                 <section className="carousel">
                     <div className="carousel-content">
                         
-                        {/* ================= LISTA ORIGINAL (3 Perfis) ================= */}
+                        {}
                         <TestimonialCard 
-                            image={ClienteMarcos}
+                            image={Cliente1}
                             text="Levei meu carro para uma revisão completa antes de viajar e o atendimento foi impecável. Honestidade no orçamento e entrega exatamente no prazo combinado. Recomendo muito a Starmec!"
                             rating={5}
                             name="Marcos Silva"
                             role="Proprietário de Sedan"
                         />
                         <TestimonialCard 
-                            image={ClienteJuca}
+                            image={Cliente2}
                             text="Melhor oficina da região! Resolveram um problema crônico na suspensão do meu carro que nenhuma outra mecânica conseguia achar o defeito. Atendimento nota 10."
                             rating={5}
                             name="Juca Ribeiro"
                             role="Proprietário de SUV"
                         />
                         <TestimonialCard 
-                            image={ClientePedro}
+                            image={Cliente3}
                             text="O diagnóstico via scanner deles é certeiro e muito rápido. Explicaram detalhadamente cada item do orçamento, sem empurrar serviços desnecessários. Ganharam um cliente!"
                             rating={5}
                             name="Pedro Santos"
                             role="Proprietário de Hatch"
                         />
 
-                        {/* ================= LISTA DUPLICADA (Efeito Loop Infinito) ================= */}
+                        {}
                         <TestimonialCard 
-                            image={ClienteMarcos}
+                            image={Cliente1}
                             text="Levei meu carro para uma revisão completa antes de viajar e o atendimento foi impecável. Honestidade no orçamento e entrega exatamente no prazo combinado. Recomendo muito a Starmec!"
                             rating={5}
                             name="Marcos Silva"
                             role="Proprietário de Sedan"
                         />
                         <TestimonialCard 
-                            image={ClienteJuca}
+                            image={Cliente2}
                             text="Melhor oficina da região! Resolveram um problema crônico na suspensão do meu carro que nenhuma outra mecânica conseguia achar o defeito. Atendimento nota 10."
                             rating={5}
                             name="Juca Ribeiro"
                             role="Proprietário de SUV"
                         />
                         <TestimonialCard 
-                            image={ClientePedro}
+                            image={Cliente3}
                             text="O diagnóstico via scanner deles é certeiro e muito rápido. Explicaram detalhadamente cada item do orçamento, sem empurrar serviços desnecessários. Ganharam um cliente!"
                             rating={5}
                             name="Pedro Santos"
@@ -311,7 +304,7 @@ export default function Home() {
                 </section>
             </section>
 
-            {/* ================= PRICING SECTOR ================= */}
+            {}
             <section id="pricing" className="container">
                 <header>
                     <p className="desktop-only">Prevenção e Manutenção</p>
@@ -339,7 +332,7 @@ export default function Home() {
                 </section>
             </section>
 
-            {/* ================= COMPONENTE DE CONTATO ================= */}
+            {}
             <section id="contact">
                 <div className="container">
                     <header>
@@ -359,7 +352,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ================= FOOTER SECTOR ================= */}
+            {}
             <footer>
                 <div className="container">
                     <div className="footer-content">
