@@ -79,3 +79,10 @@
     max-width: 32rem;
     margin-inline: auto; 
 }
+
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}

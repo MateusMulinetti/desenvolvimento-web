@@ -1,4 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Logo from "../assets/logo.svg"; 
 import Menu from "../assets/hamburguer.svg"; 
@@ -41,7 +45,13 @@ import "../styles/footer.css";
 export default function Home() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     
-  
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
+
     const whatsappLink = "https://wa.me/5545999348661?text=Olá,%20gostaria%20de%20agendar%20uma%20revisão%20na%20Starmec!";
 
     useEffect(() => {
@@ -55,14 +65,48 @@ export default function Home() {
         setShowMobileMenu(false);
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+
+        if (!recaptchaToken) {
+            toast.warn("Por favor, marque a caixa do reCAPTCHA.");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await fetch("/.netlify/functions/send-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, message, captchaToken: recaptchaToken }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success("Mensagem enviada! O e-mail já está a caminho.");
+                setEmail("");
+                setMessage("");
+                setRecaptchaToken(null);
+                recaptchaRef.current?.reset();
+            } else {
+                toast.error(`Erro: ${data.error || "Falha ao enviar."}`);
+                setRecaptchaToken(null);
+                recaptchaRef.current?.reset();
+            }
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+            toast.error("Não foi possível conectar ao servidor.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <>
-            {}
             <header className="container py-sm">
                 <nav className="flex items-center justify-between">
                     <img src={Logo} alt="Logo Starmec" width={220} height={80} />
@@ -110,7 +154,6 @@ export default function Home() {
                 </nav>
             </header>
 
-            {}
             <section id="hero">
                 <span className="desktop-only">
                     <img src={OficinaBackground} alt="Estrutura interna da oficina Starmec" />
@@ -120,7 +163,7 @@ export default function Home() {
                 <div className="container content">
                     <p className="desktop-only">Mecânica Especializada de Confiança</p>
                     <h1>Cuidado de alta performance para o seu carro, com total transparência!</h1>
-                    <p>
+                    <p className="hero-description">
                         Seu veículo merece o melhor diagnóstico técnico. Na Starmec, trabalhamos com 
                         equipamentos computadorizados para garantir sua total segurança nas pistas e estradas.
                     </p>
@@ -139,7 +182,6 @@ export default function Home() {
                 </div>
             </section>
 
-            {}
             <section className="container" id="solution">
                 <header>
                     <span>
@@ -155,7 +197,6 @@ export default function Home() {
                 </header>
 
                 <section className="services-grid">
-                    {}
                     <div className="card">
                         <span><img src={MecanicaIcon} alt="Mecânica Geral" width={48} height={48} /></span>
                         <div>
@@ -164,7 +205,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={SuspensaoIcon} alt="Suspensão" width={48} height={48} /></span>
                         <div>
@@ -173,7 +213,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={FreiosIcon} alt="Freios" width={48} height={48} /></span>
                         <div>
@@ -182,7 +221,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={OleoIcon} alt="Óleos" width={48} height={48} /></span>
                         <div>
@@ -191,7 +229,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={EmbreagemIcon} alt="Embreagem" width={48} height={48} /></span>
                         <div>
@@ -200,7 +237,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={CabecotesIcon} alt="Cabeçotes" width={48} height={48} /></span>
                         <div>
@@ -209,7 +245,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={ScannerIcon} alt="Diagnóstico" width={48} height={48} /></span>
                         <div>
@@ -218,7 +253,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={RevisoesIcon} alt="Revisões" width={48} height={48} /></span>
                         <div>
@@ -227,7 +261,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {}
                     <div className="card">
                         <span><img src={InjecaoIcon} alt="Injeção Eletrônica" width={48} height={48} /></span>
                         <div>
@@ -238,7 +271,6 @@ export default function Home() {
                 </section>
             </section>
 
-            {}
             <section id="testimonials">
                 <header>
                     <span>
@@ -253,8 +285,6 @@ export default function Home() {
 
                 <section className="carousel">
                     <div className="carousel-content">
-                        
-                        {}
                         <TestimonialCard 
                             image={Cliente1}
                             text="Levei meu carro para uma revisão completa antes de viajar e o atendimento foi impecável. Honestidade no orçamento e entrega exatamente no prazo combinado. Recomendo muito a Starmec!"
@@ -277,7 +307,6 @@ export default function Home() {
                             role="Proprietário de Hatch"
                         />
 
-                        {}
                         <TestimonialCard 
                             image={Cliente1}
                             text="Levei meu carro para uma revisão completa antes de viajar e o atendimento foi impecável. Honestidade no orçamento e entrega exatamente no prazo combinado. Recomendo muito a Starmec!"
@@ -299,12 +328,10 @@ export default function Home() {
                             name="Pedro Santos"
                             role="Proprietário de Hatch"
                         />
-
                     </div>
                 </section>
             </section>
 
-            {}
             <section id="pricing" className="container">
                 <header>
                     <p className="desktop-only">Prevenção e Manutenção</p>
@@ -323,7 +350,7 @@ export default function Home() {
                     <PricingCard 
                         title="Revisão Completa"
                         description="O plano definitivo para quem vai pegar a estrada ou quer manter o motor rodando como novo."
-                        price="R$ 249,90"
+                        price="R$ 399,90"
                         period="/revisão"
                         isPremium
                         bonusText="10% DE DESCONTO À VISTA"
@@ -332,7 +359,6 @@ export default function Home() {
                 </section>
             </section>
 
-            {}
             <section id="contact">
                 <div className="container">
                     <header>
@@ -345,14 +371,42 @@ export default function Home() {
                     </header>
 
                     <form onSubmit={handleFormSubmit}>
-                        <input type="email" placeholder="Seu Email" required />
-                        <textarea placeholder="Motivo do contato. Ex: Gostaria de agendar uma troca de óleo na próxima terça-feira, teria horário disponível?" required></textarea>
-                        <button type="submit" className="btn-primary">Enviar Mensagem</button>
+                        <input 
+                            type="email" 
+                            placeholder="Seu Email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            disabled={loading}
+                            required 
+                        />
+                        <textarea 
+                            placeholder="Motivo do contato. Ex: Gostaria de agendar uma troca de óleo na próxima terça-feira, teria horário disponível?" 
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            disabled={loading}
+                            required
+                        ></textarea>
+
+                     <div className="captcha-container">
+                     <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                            onChange={(token) => setRecaptchaToken(token)}
+                            theme="dark"
+                        />
+                         </div>
+                        
+                        <button 
+                            type="submit" 
+                            className="btn-primary" 
+                            disabled={loading}
+                        >
+                            {loading ? "Enviando..." : "Enviar Mensagem"}
+                        </button>
                     </form>
                 </div>
             </section>
 
-            {}
             <footer>
                 <div className="container">
                     <div className="footer-content">
@@ -404,6 +458,20 @@ export default function Home() {
                     </div>
                 </div>
             </footer>
+
+            {}
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark" 
+            />
         </>
     );
 }

@@ -26,6 +26,11 @@
   color: var(--second-text-color);
 }
 
+.hero-description {
+    color: #ff0000 !important;; 
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9)
+}
+
 #hero .content {
     z-index: 1;
     display: flex;
